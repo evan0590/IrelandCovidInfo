@@ -1,0 +1,75 @@
+.DS_Store
+.idea
+.vscode
+
+# local directories not in use
+/jupyter-notebooks
+/notes
+
+# React dependencies
+/frontend/gui/node_modules
+/frontend/gui/.pnp
+/frontend/gui.pnp.js
+
+# React testing
+/frontend/gui/coverage
+
+# React production
+/frontend/gui/build
+
+# React misc
+/frontend/gui/.DS_Store
+/frontend/gui/.env
+/frontend/gui/.env.local
+/frontend/gui/.env.development.local
+/frontend/gui/.env.test.local
+/frontend/gui/.env.production.local
+
+/frontend/gui/npm-debug.log*
+/frontend/gui/yarn-debug.log*
+/frontend/gui/yarn-error.log*
+
+frontend/gui/src/components/StaticApiData.js
+frontend/gui/src/data/testAxios.js
+frontend/gui/.eslintcache
+
+# Spring
+/backend/spring/HELP.md
+/backend/spring/target/
+/backend/spring/!.mvn/wrapper/maven-wrapper.jar
+/backend/spring/!**/src/main/**/target/
+/backend/spring/!**/src/test/**/target/
+
+backend/spring/src/main/resources/application.yaml
+backend/spring/src/main/resources/db/migration/V1__TestTable.sql
+
+### STS ###
+/backend/spring/.apt_generated
+/backend/spring/.classpath
+/backend/spring/.factorypath
+/backend/spring/.project
+/backend/spring/.settings
+/backend/spring/.springBeans
+/backend/spring/.sts4-cache
+
+### IntelliJ IDEA ###
+/backend/spring/.idea
+/backend/spring/*.iws
+/backend/spring/*.iml
+/backend/spring/*.ipr
+
+### NetBeans ###
+/backend/spring/nbproject/private/
+/backend/spring/nbbuild/
+/backend/spring/dist/
+/backend/spring/nbdist/
+/backend/spring/.nb-gradle/
+/backend/spring/build/
+/backend/spring/!**/src/main/**/build/
+/backend/spring/!**/src/test/**/build/
+
+### VS Code ###
+/backend/spring/.vscode/
+
+# Python
+/database
