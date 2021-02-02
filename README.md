@@ -5,11 +5,12 @@ This application allows users to view information related to the spread of Covid
 
 This project is divided into a backend and frontend. The backend has been developed using the Java Spring Boot web framework to host a simple API. The frontend has been developed using React and queries data from the API.
 
-In order to run this project locally it is necessary to have Node.js, the npm package manager, and Java 11 installed on your machine.
+In order to run this project locally it is necessary to have Node.js, the npm package manager, Java 11 and Maven installed on your machine.
 
-With these prerequisites fulfilled, to start the backend run the following command from the ```backend``` directory:
+With these prerequisites fulfilled, to start the backend run the following command from the ```spring``` directory within the ```backend``` directory:
 ```json
-java -jar spring/target/spring-0.0.1-SNAPSHOT.jar
+mvn clean install
+java -jar target/spring-0.0.1-SNAPSHOT.jar
 ```
 This command will run the Spring Boot server that serves the user interface with Covid-19 data.
 
