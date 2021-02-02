@@ -19,3 +19,4 @@ Following this, open another window while keeping the Spring Boot server running
 npm install
 npm start
 ```
+The first command will install all of the necessary requirements for the React application and may take some time. The second command will start the application and run it with instructions displayed as to how to access it. At this point you now have the application running locally on your machine.
