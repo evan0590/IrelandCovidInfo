@@ -5,7 +5,6 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-import StaticApiData from "./StaticApiData";
 import LiveApiData from "./LiveApiData";
 
 // Latitude and longitude coordinates are: 52.668018, -8.630498.

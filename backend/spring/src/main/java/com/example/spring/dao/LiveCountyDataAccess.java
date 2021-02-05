@@ -20,7 +20,8 @@ public class LiveCountyDataAccess implements LiveCountyDao {
     @Override
     public Optional<LiveCountyData> liveSelectCountyByName(String name) {
         final String sql = "SELECT county_name, fid, confirmed_covid_cases, population_proportion_covid_cases, " +
-                "time_stamp_date, date_string FROM live_county_data WHERE county_name = ?";
+                "time_stamp_date, date_string FROM live_county_data WHERE county_name = ? " +
+                "ORDER BY time_stamp_date DESC LIMIT 1";
         LiveCountyData liveCountyData = jdbcTemplate.queryForObject(
                 sql,
                 new Object[]{name},
