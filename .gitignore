@@ -71,7 +71,6 @@ backend/spring/src/main/resources/db/migration/V1__TestTable.sql
 /backend/spring/.vscode/
 
 ### Python ###
-/database/.env
 /database/env
 /database/.idea
 /database/__pycache__
