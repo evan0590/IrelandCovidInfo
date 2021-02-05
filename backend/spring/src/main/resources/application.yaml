@@ -1,6 +1,6 @@
 app:
   datasource:
-    jdbc-url: <insert host here>
+    jdbc-url: jdbc:postgresql://<insert host here>:5432/covid_database
     username: postgres
     password: <insert password here>
     pool-size: 30
