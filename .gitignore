@@ -40,8 +40,6 @@ frontend/gui/.eslintcache
 /backend/spring/!**/src/main/**/target/
 /backend/spring/!**/src/test/**/target/
 
-backend/spring/src/main/resources/db/migration/V1__TestTable.sql
-
 ### STS ###
 /backend/spring/.apt_generated
 /backend/spring/.classpath
