@@ -27,7 +27,7 @@ Identify the host/endpoint associated with this database instance by running the
 aws rds describe-db-instances \
     --db-instance-identifier spring-boot-instance
 ```
-Locate and copy the database endpoint which is the value of the key ```Address``` within the nested ```Endpoint```.
+Locate and copy the database endpoint which is the value of the key ```Address``` within the nested ```Endpoint``` object.
 
 Navigate into the ```database``` directory and amend the ```.env``` file with the database endpoint and password. Run the following commands:
 ```json
