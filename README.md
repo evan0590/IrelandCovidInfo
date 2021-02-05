@@ -8,8 +8,7 @@ This project is divided into a backend and frontend. The backend has been develo
 In order to run this project locally it is necessary to have Node.js, the npm package manager, Java 11 and Maven installed on your machine.
 
 Using the AWS Command Line Interface tool to create the database for the Spring Boot API to retrieve data from, run the following command:
-```
-json
+```json
 aws rds create-db-instance \
     --db-name covid_database \
     --db-instance-identifier spring-boot-instance \
@@ -24,12 +23,11 @@ aws rds create-db-instance \
 ```
 This will create a databse instance with an initial database in it named ```covid_database```. Add a password next to the ```--master-user-password``` option. Add the security group id of the security group associated with your IP adddress next to the ```----vpc-security-group-ids``` option. Add an availability zone next to the ```--availability-zone``` option. \
 Identify the host/endpoint associated with this database instance by running the following command:
-```
-json
+```json
 aws rds describe-db-instances \
     --db-instance-identifier spring-boot-instance
 ```
-Copy the value of the key ```Address``` key within the nested ```Endpoint``` object, this is the database endpoint.
+Locate and copy the database endpoint which is the value of the key ```Address``` within the nested ```Endpoint```.
 
 Navigate into the ```database``` directory and amend the ```.env``` file with the database endpoint and password. Run the following commands:
 ```json
