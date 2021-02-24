@@ -19,8 +19,10 @@ import SubjectIcon from "@material-ui/icons/Subject";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Weather from "simple-react-weather";
 
 import Map from "../components/Map";
+import CustomDialog from "../components/CustomDialog";
 
 import "../App.css";
 
@@ -93,6 +95,8 @@ export default function Layout() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [dialogFlag, setDialogFlag] = React.useState();
   // latitude and longitude variable saved in state.
   const [lat, setLat] = useState(irelandCenter.lat);
   const [lng, setLng] = useState(irelandCenter.lng);
@@ -103,6 +107,15 @@ export default function Layout() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleDialogOpen = () => {
+    console.log();
+    setDialogOpen(true);
+  };
+
+  const handleDialogFlag = (bool) => {
+    setDialogFlag(bool);
   };
 
   return (
@@ -132,6 +145,16 @@ export default function Layout() {
           >
             Covid-19 Information - Ireland
           </Typography>
+          <Weather
+            // Inbuilt props: https://github.com/lopogo59/simple-react-weather#readme.
+            unit="C"
+            lat={lat}
+            lon={lng}
+            appid={process.env.REACT_APP_WEATHER_API}
+            style={{
+              paddingTop: "1vh",
+            }}
+          />
         </Toolbar>
       </AppBar>
       <Drawer
@@ -154,19 +177,39 @@ export default function Layout() {
         </div>
         <Divider />
         <List>
-          <ListItem>
+          <ListItem
+            button
+            key={"About"}
+            onClick={() => {
+              handleDialogOpen();
+              handleDialogFlag(true);
+            }}
+          >
             <ListItemIcon>
               <SubjectIcon />
             </ListItemIcon>
             <ListItemText primary={"About"} />
           </ListItem>
-          <ListItem>
+          <ListItem
+            button
+            key={"Key"}
+            onClick={() => {
+              handleDialogOpen();
+              handleDialogFlag(false);
+            }}
+          >
             <ListItemIcon>
               <LocationOnIcon />
             </ListItemIcon>
             <ListItemText primary={"Key"} />
           </ListItem>
         </List>
+        <CustomDialog
+          dialogOpen={dialogOpen}
+          setDialogOpen={setDialogOpen}
+          dialogFlag={dialogFlag}
+          setDialogFlag={setDialogFlag}
+        ></CustomDialog>
 
         <Divider />
       </Drawer>

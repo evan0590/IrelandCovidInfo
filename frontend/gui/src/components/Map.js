@@ -25,6 +25,7 @@ export default function Map(props) {
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_API,
   });
   const center = irelandCenter;
+  // eslint-disable-next-line
   const [mapOptions, setMapOptions] = useState({
     // gestureHandling: "none",
     styles: mapNormalModeBasic,
@@ -39,7 +40,9 @@ export default function Map(props) {
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [markerMap, setMarkerMap] = useState({});
   const [infoOpen, setInfoOpen] = useState(false);
+  // eslint-disable-next-line
   const [geoMarkers, setGeoMarkers] = useState([]);
+  // eslint-disable-next-line
   const [selected, setSelected] = useState(null); // removing unwanted warning.
 
   const mapRef = React.useRef();
