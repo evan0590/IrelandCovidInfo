@@ -72,3 +72,40 @@ frontend/gui/.eslintcache
 /database/env
 /database/.idea
 /database/__pycache__
+
+### Java - Database ###
+/database-java/database/HELP.md
+/database-java/database/target/
+/database-java/database/!.mvn/wrapper/maven-wrapper.jar
+/database-java/database/!**/src/main/**/target/
+
+/database-java/database/!**/src/test/**/target/
+
+### Java - Database STS ###
+/database-java/database/.apt_generated
+/database-java/database/.classpath
+/database-java/database/.factorypath
+/database-java/database/.project
+/database-java/database/.settings
+/database-java/database/.springBeans
+/database-java/database/.sts4-cache
+
+### Java - Database IntelliJ IDEA ###
+/database-java/.idea
+/database-java/*.iws
+/database-java/*.iml
+/database-java/*.ipr
+/database-java/database/.idea
+/database-java/database/*.iws
+/database-java/database/*.iml
+/database-java/database/*.ipr
+
+### Java - Database NetBeans ###
+/database-java/database/nbproject/private/
+/database-java/database/nbbuild/
+/database-java/database/dist/
+/database-java/database/nbdist/
+/database-java/database/.nb-gradle/
+/database-java/database/build/
+/database-java/database/!**/src/main/**/build/
+/database-java/database/!**/src/test/**/build/
