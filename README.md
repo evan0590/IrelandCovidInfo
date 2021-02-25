@@ -29,16 +29,13 @@ aws rds describe-db-instances \
 ```
 Locate and copy the database endpoint which is the value of the key ```Address``` within the nested ```Endpoint``` object.
 
-Navigate into the ```database``` directory and amend the ```.env``` file with the database endpoint and password. Run the following commands:
+From the root of the repository, run the command ```nano /database-java/database/src/main/resources/database.properties``` and amend the file with the database endpoint and password. \ 
+To populate the database, navigate into the ```database-java``` directory located at the top of the repository, and then into the ```database``` directory within that directory. When inside this directory run the following two commands:
 ```json
-python -m venv env
-source env/bin/activate
-pip install -r requirements.txt
-python create_tables.py
-python static_table_populate.py
-python live_table_populate.py
+mvn clean install
+java -jar target/database-1.0-SNAPSHOT.jar
 ```
-These commands will create and activate a virtual environment named ```env``` with the required dependencies, and create and populate the tables required by the Spring Boot API. \
+This command will populate the database table containing the daily covid data by county.
 
 From the root of the repository, run the command ```nano backend/spring/src/main/resources/application.yaml``` and amend the file with the database endpoint and password. \
 To start the backend, navigate first into the ```backend``` directory located at the top of the repository, and then into the ```spring``` directory. When inside this directory run the following two commands:
