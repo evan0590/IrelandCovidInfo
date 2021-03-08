@@ -90,7 +90,6 @@ frontend/gui/.eslintcache
 /database/postgres/*.iws
 /database/postgres/*.iml
 /database/postgres/*.ipr
-database/postgres
 
 ### Java - Database NetBeans ###
 /database/postgres/nbproject/private/
