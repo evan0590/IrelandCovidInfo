@@ -29,13 +29,13 @@ aws rds describe-db-instances \
 ```
 Locate and copy the database endpoint which is the value of the key ```Address``` within the nested ```Endpoint``` object.
 
-From the root of the repository, run the command ```nano /database-java/database/src/main/resources/database.properties``` and amend the file with the database endpoint and password. \ 
-To populate the database, navigate into the ```database-java``` directory located at the top of the repository, and then into the ```database``` directory within that directory. When inside this directory run the following two commands:
+From the root of the repository, run the command ```nano /database/postgres/src/main/resources/database.properties``` and amend the file with the database endpoint and password. \ 
+To populate the database, navigate into the ```database``` directory located at the top of the repository, and then into the ```postgres``` directory within that directory. When inside this directory run the following two commands:
 ```json
 mvn clean install
 java -jar target/database-1.0-SNAPSHOT.jar
 ```
-This command will populate the database table containing the daily covid data by county.
+This command will create and populate the database tables with the relevant information.
 
 From the root of the repository, run the command ```nano backend/spring/src/main/resources/application.yaml``` and amend the file with the database endpoint and password. \
 To start the backend, navigate first into the ```backend``` directory located at the top of the repository, and then into the ```spring``` directory. When inside this directory run the following two commands:
