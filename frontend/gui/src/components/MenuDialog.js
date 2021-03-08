@@ -8,7 +8,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 
 export default function CustomDialog(props) {
   const handleClose = () => {
-    props.setDialogOpen(false);
+    props.setMenuDialogOpen(false);
   };
 
   // This application allows users to view information related to the spread of Covid-19 in Ireland. All data has been gathered from covid-19.geohive.ie.
@@ -23,12 +23,12 @@ export default function CustomDialog(props) {
     "The frontend has been developed using React and queries data from the API ." +
     "A PostgreSQL database serving the API is implemented.";
 
-  if (props.dialogFlag === true) {
+  if (props.menuDialogFlag === true) {
     return (
       <React.Fragment>
         <Dialog
           maxWidth={"sm"}
-          open={props.dialogOpen}
+          open={props.menuDialogOpen}
           onClose={handleClose}
           aria-labelledby="max-width-dialog-title"
         >
@@ -49,7 +49,7 @@ export default function CustomDialog(props) {
       <React.Fragment>
         <Dialog
           maxWidth={"sm"}
-          open={props.dialogOpen}
+          open={props.menuDialogOpen}
           onClose={handleClose}
           aria-labelledby="max-width-dialog-title"
         >

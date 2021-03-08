@@ -2,7 +2,7 @@
 .idea
 .vscode
 
-# local directories not in use
+# local directories
 /jupyter-notebooks
 /notes
 
@@ -68,44 +68,36 @@ frontend/gui/.eslintcache
 ### VS Code ###
 /backend/spring/.vscode/
 
-### Python ###
-/database/env
-/database/.idea
-/database/__pycache__
-
 ### Java - Database ###
-/database-java/database/HELP.md
-/database-java/database/target/
-/database-java/database/!.mvn/wrapper/maven-wrapper.jar
-/database-java/database/!**/src/main/**/target/
+/database/postgres/HELP.md
+/database/postgres/target/
+/database/postgres/!.mvn/wrapper/maven-wrapper.jar
+/database/postgres/!**/src/main/**/target/
 
-/database-java/database/!**/src/test/**/target/
+/database/postgres/!**/src/test/**/target/
 
 ### Java - Database STS ###
-/database-java/database/.apt_generated
-/database-java/database/.classpath
-/database-java/database/.factorypath
-/database-java/database/.project
-/database-java/database/.settings
-/database-java/database/.springBeans
-/database-java/database/.sts4-cache
+/database/postgres/.apt_generated
+/database/postgres/.classpath
+/database/postgres/.factorypath
+/database/postgres/.project
+/database/postgres/.settings
+/database/postgres/.springBeans
+/database/postgres/.sts4-cache
 
 ### Java - Database IntelliJ IDEA ###
-/database-java/.idea
-/database-java/*.iws
-/database-java/*.iml
-/database-java/*.ipr
-/database-java/database/.idea
-/database-java/database/*.iws
-/database-java/database/*.iml
-/database-java/database/*.ipr
+/database/postgres/.idea
+/database/postgres/*.iws
+/database/postgres/*.iml
+/database/postgres/*.ipr
+database/postgres
 
 ### Java - Database NetBeans ###
-/database-java/database/nbproject/private/
-/database-java/database/nbbuild/
-/database-java/database/dist/
-/database-java/database/nbdist/
-/database-java/database/.nb-gradle/
-/database-java/database/build/
-/database-java/database/!**/src/main/**/build/
-/database-java/database/!**/src/test/**/build/
+/database/postgres/nbproject/private/
+/database/postgres/nbbuild/
+/database/postgres/dist/
+/database/postgres/nbdist/
+/database/postgres/.nb-gradle/
+/database/postgres/build/
+/database/postgres/!**/src/main/**/build/
+/database/postgres/!**/src/test/**/build/

@@ -22,7 +22,7 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Weather from "simple-react-weather";
 
 import Map from "../components/Map";
-import CustomDialog from "../components/CustomDialog";
+import MenuDialog from "../components/MenuDialog";
 
 import "../App.css";
 
@@ -94,9 +94,9 @@ const useStyles = makeStyles((theme) => ({
 export default function Layout() {
   const classes = useStyles();
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [dialogFlag, setDialogFlag] = React.useState();
+  const [open, setOpen] = useState(false);
+  const [menuDialogOpen, setMenuDialogOpen] = useState(false);
+  const [menuDialogFlag, setMenuDialogFlag] = useState();
   // latitude and longitude variable saved in state.
   const [lat, setLat] = useState(irelandCenter.lat);
   const [lng, setLng] = useState(irelandCenter.lng);
@@ -109,13 +109,13 @@ export default function Layout() {
     setOpen(false);
   };
 
-  const handleDialogOpen = () => {
+  const handleMenuDialogOpen = () => {
     console.log();
-    setDialogOpen(true);
+    setMenuDialogOpen(true);
   };
 
-  const handleDialogFlag = (bool) => {
-    setDialogFlag(bool);
+  const handleMenuDialogFlag = (bool) => {
+    setMenuDialogFlag(bool);
   };
 
   return (
@@ -181,8 +181,8 @@ export default function Layout() {
             button
             key={"About"}
             onClick={() => {
-              handleDialogOpen();
-              handleDialogFlag(true);
+              handleMenuDialogOpen();
+              handleMenuDialogFlag(true);
             }}
           >
             <ListItemIcon>
@@ -194,8 +194,8 @@ export default function Layout() {
             button
             key={"Key"}
             onClick={() => {
-              handleDialogOpen();
-              handleDialogFlag(false);
+              handleMenuDialogOpen();
+              handleMenuDialogFlag(false);
             }}
           >
             <ListItemIcon>
@@ -204,12 +204,12 @@ export default function Layout() {
             <ListItemText primary={"Key"} />
           </ListItem>
         </List>
-        <CustomDialog
-          dialogOpen={dialogOpen}
-          setDialogOpen={setDialogOpen}
-          dialogFlag={dialogFlag}
-          setDialogFlag={setDialogFlag}
-        ></CustomDialog>
+        <MenuDialog
+          menuDialogOpen={menuDialogOpen}
+          setMenuDialogOpen={setMenuDialogOpen}
+          menuDialogFlag={menuDialogFlag}
+          setMenuDialogFlag={setMenuDialogFlag}
+        ></MenuDialog>
 
         <Divider />
       </Drawer>

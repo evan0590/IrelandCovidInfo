@@ -6,6 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import LiveApiData from "./LiveApiData";
+import GraphDialog from "./GraphDialog";
 
 // Latitude and longitude coordinates are: 52.668018, -8.630498.
 const irelandCenter = require("../data/IrelandCenter.json");
@@ -44,6 +45,7 @@ export default function Map(props) {
   const [geoMarkers, setGeoMarkers] = useState([]);
   // eslint-disable-next-line
   const [selected, setSelected] = useState(null); // removing unwanted warning.
+  const [graphDialogOpen, setGraphDialogOpen] = useState(false);
 
   const mapRef = React.useRef();
   const onMapLoad = React.useCallback((map) => {
@@ -64,6 +66,10 @@ export default function Map(props) {
       setInfoOpen(false);
     }
     setInfoOpen(true);
+  };
+
+  const handleGraphDialogOpen = () => {
+    setGraphDialogOpen(true);
   };
 
   if (loadError) return "Error";
@@ -122,6 +128,15 @@ export default function Map(props) {
             }}
           >
             <h2>{selectedPlace.properties.id}</h2>
+            <button
+              onClick={() => {
+                handleGraphDialogOpen();
+              }}
+            ></button>
+            <GraphDialog
+              graphDialogOpen={graphDialogOpen}
+              setGraphDialogOpen={setGraphDialogOpen}
+            ></GraphDialog>
             {/* {console.log(selectedPlace.properties.id)} */}
             {/* <StaticApiData></StaticApiData> */}
             <LiveApiData
