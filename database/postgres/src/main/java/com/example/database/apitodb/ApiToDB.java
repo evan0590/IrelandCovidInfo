@@ -1,6 +1,5 @@
 package com.example.database.apitodb;
 
-import com.example.database.dbconnection.DBConnection;
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -13,14 +12,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import com.example.database.dto.*;
+import com.example.database.dbconnection.DBConnection;
+import com.example.database.utils.DateTime;
 
 
 public class ApiToDB {
 
-    public void covidApiCallToDB() throws IOException {
-        String uri = "https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/" +
-                "/Covid19CountyStatisticsHPSCIrelandOpenData/FeatureServer/0/" +
-                "query?where=1%3D1&outFields=*&outSR=4326&f=json";
+    String uri = "https://services1.arcgis.com/eNO7HHeQ3rUcBllm/arcgis/rest/services/" +
+            "/Covid19CountyStatisticsHPSCIrelandOpenData/FeatureServer/0/" +
+            "query?where=1%3D1&outFields=*&outSR=4326&f=json";
+
+
+    public void liveDataAPIToDB() throws IOException {
+
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder()
                 .uri(URI.create(uri))
@@ -28,14 +32,8 @@ public class ApiToDB {
 
         try {
             var response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-            System.out.println("");
 
             JsonObjectDTO obj = new Gson().fromJson(response.body(), JsonObjectDTO.class);
-
-            System.out.println("!!!");
-            System.out.println(obj.objectIdFieldName);
-            System.out.println("!!!");
 
             for (FeaturesDTO feat : obj.features) {
                 AttributesDTO attr = feat.attributes;
@@ -50,32 +48,60 @@ public class ApiToDB {
                 Integer fid = attr.FID;
                 Integer confirmedCovidCases = attr.ConfirmedCovidCases;
                 Float populationProportionCovidCases = attr.PopulationProportionCovidCases;
-                Long timeStampDate = attr.TimeStampDate;
                 String dateString = formattedDate;
 
-                ArrayList<Object> tableData = new ArrayList<Object>();
-                tableData.add(countyName);
-                tableData.add(fid);
-                tableData.add(confirmedCovidCases);
-                tableData.add(populationProportionCovidCases);
-                tableData.add(intTimeStamp);
-                tableData.add(dateString);
+                ArrayList<Object> liveTableData = new ArrayList<Object>();
+                liveTableData.add(countyName);
+                liveTableData.add(fid);
+                liveTableData.add(confirmedCovidCases);
+                liveTableData.add(populationProportionCovidCases);
+                liveTableData.add(intTimeStamp);
+                liveTableData.add(dateString);
 
                 DBConnection dbConnection = new DBConnection();
-                dbConnection.dbWriteTo(tableData);
+                dbConnection.liveTablePopulate(liveTableData);
 
-                System.out.println("### "+ attr.CountyName + " ### \n");
-                System.out.println("--- "+ attr.FID + " --- \n");
-                System.out.println("!!! "+ attr.ConfirmedCovidCases + " !!! \n");
-                System.out.println("/// "+ attr.PopulationProportionCovidCases + " /// \n");
-                System.out.println("... "+ attr.TimeStampDate + " ... \n");
-                System.out.println("{{{ "+ formattedDate + " }}} \n");
+            }
+        }
+        catch (Exception e) {
+            System.out.println(DateTime.dateTimeNow());
+            e.printStackTrace();
+        }
+    }
+
+    public void staticDataAPIToDB() throws IOException {
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create(uri))
+                .build();
+
+        try {
+            var response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+
+            JsonObjectDTO obj = new Gson().fromJson(response.body(), JsonObjectDTO.class);
+
+            for (FeaturesDTO feat : obj.features) {
+                AttributesDTO attr = feat.attributes;
+
+                String countyName = attr.CountyName;
+                Float lat = attr.Lat;
+                Float longitude = attr.Long;
+                Integer populationCensus16 = attr.PopulationCensus16;
+
+                ArrayList<Object> staticTableData = new ArrayList<Object>();
+                staticTableData.add(countyName);
+                staticTableData.add(lat);
+                staticTableData.add(longitude);
+                staticTableData.add(populationCensus16);
+
+                DBConnection dbConnection = new DBConnection();
+                dbConnection.staticTablePopulate(staticTableData);
 
             }
 
         } catch (Exception e) {
+            System.out.println(DateTime.dateTimeNow());
             e.printStackTrace();
         }
-
     }
 }

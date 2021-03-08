@@ -1,5 +1,9 @@
 package com.example.database.dto;
 
+/*
+Data Transfer Object (DTO)
+Used for parsing the covid data api response
+ */
 public class AttributesDTO {
     public String ORIGID;
     public String CountyName;                      // column

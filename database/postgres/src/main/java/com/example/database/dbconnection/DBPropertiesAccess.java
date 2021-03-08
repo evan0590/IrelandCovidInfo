@@ -1,5 +1,7 @@
 package com.example.database.dbconnection;
 
+import com.example.database.utils.DateTime;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,7 @@ public class DBPropertiesAccess {
             dbCredentials.add(prop.getProperty("db.password"));
 
         } catch (Exception ex) {
+            System.out.println(DateTime.dateTimeNow());
             System.out.println("Exception: " + ex);
         } finally {
             input.close();
