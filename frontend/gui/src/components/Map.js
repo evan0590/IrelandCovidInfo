@@ -6,7 +6,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import LiveApiData from "./LiveApiData";
-import GraphDialog from "./GraphDialog";
+import GraphDialog from "../containers/GraphDialog";
 
 // Latitude and longitude coordinates are: 52.668018, -8.630498.
 const irelandCenter = require("../data/IrelandCenter.json");

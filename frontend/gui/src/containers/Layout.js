@@ -21,8 +21,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Weather from "simple-react-weather";
 
+import MenuDialog from "./MenuDialog";
 import Map from "../components/Map";
-import MenuDialog from "../components/MenuDialog";
 
 import "../App.css";
 
