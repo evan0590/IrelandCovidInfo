@@ -1,45 +1,36 @@
-import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-} from "@material-ui/core";
+  XAxis,
+  YAxis,
+  Tooltip,
+  CartesianGrid,
+  Legend,
+  BarChart,
+  Bar,
+  Cell,
+  Pie,
+  PieChart,
+} from "recharts";
+import { scaleOrdinal } from "d3-scale";
+import { schemeCategory10 } from "d3-scale-chromatic";
 const axios = require("axios");
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+const colors = scaleOrdinal(schemeCategory10).range();
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
+const GraphApiData = (props) => {
+  const handlePvBarClick = (data, index, e) => {
+    console.log(`Pv Bar (${index}) Click: `, data);
+  };
 
-const useStyles = makeStyles({
-  table: {
-    maxWidth: 600,
-    // maxHeight: 500,
-  },
-});
+  const handleBarAnimationStart = () => {
+    console.log("Animation start");
+  };
 
-const LiveApiData = (props) => {
-  const classes = useStyles();
-  // A placeholder variable used while waiting for RTPI response.
-  const placeholder = {
+  const handleBarAnimationEnd = () => {
+    console.log("Animation end");
+  };
+  // A placeholder variable used while waiting for api response.
+  const barDataPlaceholder = {
     results: [
       {
         countyName: "",
@@ -56,17 +47,35 @@ const LiveApiData = (props) => {
       },
     ],
   };
-  // The response from the backend we need to track in state:
-  const [rawLiveCountyData, setRawLiveCountyData] = React.useState(placeholder);
+
+  const pieDataPlaceholder = [
+    { name: "", value: 0 },
+    { name: "", value: 0 },
+  ];
+  // The responses from the backend we need to track in state:
+  const [rawLiveCountyData, setRawLiveCountyData] = useState(
+    barDataPlaceholder
+  );
+  const [pieData, setPieData] = useState(pieDataPlaceholder);
 
   React.useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
     const loadData = () => {
       try {
-        axios.get(`api/v1/live-county/${props.countyName}`).then((res) => {
-          setRawLiveCountyData({ results: res.data });
-        });
+        axios
+          .get(`api/v1/live-county/recent/${props.countyName}`)
+          .then((res) => {
+            console.log();
+            setRawLiveCountyData({ results: res.data });
+            setPieData([
+              { name: "Population", value: props.population },
+              {
+                name: "Confirmed Cases",
+                value: res.data[0].confirmedCovidCases,
+              },
+            ]);
+          });
       } catch (error) {
         if (axios.isCancel(error)) {
         } else {
@@ -85,46 +94,46 @@ const LiveApiData = (props) => {
   if (String(liveCountyData.countyName) === "") {
     return null;
   } else {
-    return (
-      <TableContainer
-        component={Paper}
-        style={{ maxHeight: "15vh", overflowY: "scroll" }}
-      >
-        <Table
-          className={classes.table}
-          size="small"
-          aria-label="a dense table"
+    if (props.barChartFlag === true) {
+      return (
+        <BarChart
+          width={800}
+          height={400}
+          data={liveCountyData}
+          onClick={handlePvBarClick}
         >
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>Confirmed Cases</StyledTableCell>
-              <StyledTableCell align="center">Population</StyledTableCell>
-              <StyledTableCell align="center">
-                Population Proportion Covid Cases
-              </StyledTableCell>
-              <StyledTableCell align="center">Recent Update</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <StyledTableRow key={liveCountyData.fid}>
-              <StyledTableCell component="th" scope="row">
-                {liveCountyData.confirmedCovidCases}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {props.population}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {liveCountyData.populationProportionCovidCases}
-              </StyledTableCell>
-              <StyledTableCell component="th" scope="row">
-                {liveCountyData.dateString}
-              </StyledTableCell>
-            </StyledTableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-    );
+          <XAxis dataKey="dateString" />
+          <YAxis yAxisId="a" />
+          <Legend />
+          <Tooltip />
+          <CartesianGrid vertical={false} />
+          <Bar
+            yAxisId="a"
+            dataKey="confirmedCovidCases"
+            onAnimationStart={handleBarAnimationStart}
+            onAnimationEnd={handleBarAnimationEnd}
+          >
+            {liveCountyData.map((entry, index) => (
+              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+            ))}
+          </Bar>
+        </BarChart>
+      );
+    }
+    if (props.pieChartFlag === true) {
+      return (
+        <PieChart width={800} height={400}>
+          <Legend />
+          <Tooltip />
+          <Pie data={pieData} dataKey="value" startAngle={360} endAngle={0}>
+            {pieData.map((entry, index) => (
+              <Cell key={`slice-${index}`} fill={colors[index % 10]} />
+            ))}
+          </Pie>
+        </PieChart>
+      );
+    }
   }
 };
 
-export default LiveApiData;
+export default GraphApiData;

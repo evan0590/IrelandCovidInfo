@@ -32,4 +32,9 @@ public class LiveCountyController {
         return liveCountyService.liveGetCountiesByDate(stringDate);
     }
 
+    @GetMapping(path = "/recent/{county_name}")
+    public List<LiveCountyData> liveGetRecentDataByCountyName(@PathVariable("county_name") String name) {
+        return liveCountyService.liveGetRecentDataByCountyName(name);
+    }
+
 }

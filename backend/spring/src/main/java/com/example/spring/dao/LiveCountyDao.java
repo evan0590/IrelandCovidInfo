@@ -10,4 +10,6 @@ public interface LiveCountyDao {
     Optional<LiveCountyData> liveSelectCountyByName(String name);
 
     List<LiveCountyData> liveSelectCountiesByDate(String stringDate);
+
+    List<LiveCountyData> liveSelectRecentDataByCountyName(String name);
 }

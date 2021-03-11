@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import {
-  useLoadScript,
-  GoogleMap,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
-import LiveApiData from "./LiveApiData";
+import { useLoadScript, GoogleMap, Marker } from "@react-google-maps/api";
+
 import GraphDialog from "../containers/GraphDialog";
 
 // Latitude and longitude coordinates are: 52.668018, -8.630498.
@@ -39,12 +34,9 @@ export default function Map(props) {
   const [zoom, setZoom] = useState(8); // removing unwanted warning.
   // The general things we need to track in state:
   const [selectedPlace, setSelectedPlace] = useState(null);
+  // eslint-disable-next-line
   const [markerMap, setMarkerMap] = useState({});
   const [infoOpen, setInfoOpen] = useState(false);
-  // eslint-disable-next-line
-  const [geoMarkers, setGeoMarkers] = useState([]);
-  // eslint-disable-next-line
-  const [selected, setSelected] = useState(null); // removing unwanted warning.
   const [graphDialogOpen, setGraphDialogOpen] = useState(false);
 
   const mapRef = React.useRef();
@@ -107,44 +99,18 @@ export default function Map(props) {
             markerClickHandler(event, county);
             props.setLat(county.geometry.pos.lat);
             props.setLng(county.geometry.pos.lng);
+            handleGraphDialogOpen();
           }}
           animation={window.google.maps.Animation.DROP}
         />
       ))}
-      {infoOpen && selectedPlace && (
-        <InfoWindow
-          // Inbuilt props: https://react-google-maps-api-docs.netlify.app/#infowindow.
-          anchor={markerMap[selectedPlace.properties.id]}
-          // onClick={() => {
-          //   props.setLat(selectedPlace.geometry.pos.lat);
-          //   props.setLng(selectedPlace.geometry.pos.lng);
-          // }}
-          onCloseClick={() => setInfoOpen(false)}
-        >
-          <div
-            style={{
-              textAlign: "center",
-              verticalAlign: "middle",
-            }}
-          >
-            <h2>{selectedPlace.properties.id}</h2>
-            <button
-              onClick={() => {
-                handleGraphDialogOpen();
-              }}
-            ></button>
-            <GraphDialog
-              graphDialogOpen={graphDialogOpen}
-              setGraphDialogOpen={setGraphDialogOpen}
-            ></GraphDialog>
-            {/* {console.log(selectedPlace.properties.id)} */}
-            {/* <StaticApiData></StaticApiData> */}
-            <LiveApiData
-              countyName={selectedPlace.properties.id}
-              population={selectedPlace.properties.number}
-            ></LiveApiData>
-          </div>
-        </InfoWindow>
+      {selectedPlace && (
+        <GraphDialog
+          graphDialogOpen={graphDialogOpen}
+          setGraphDialogOpen={setGraphDialogOpen}
+          countyName={selectedPlace.properties.id}
+          population={selectedPlace.properties.number}
+        ></GraphDialog>
       )}
     </GoogleMap>
   );

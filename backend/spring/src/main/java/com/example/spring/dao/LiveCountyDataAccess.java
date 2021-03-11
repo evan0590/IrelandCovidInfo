@@ -42,21 +42,42 @@ public class LiveCountyDataAccess implements LiveCountyDao {
 
     @Override
     public List<LiveCountyData> liveSelectCountiesByDate(String stringDate) {
-                final String sql = "SELECT county_name, fid, confirmed_covid_cases, population_proportion_covid_cases, " +
-                "time_stamp_date, date_string FROM live_county_data WHERE date_string = ?";
+        final String sql = "SELECT county_name, fid, confirmed_covid_cases, population_proportion_covid_cases, " +
+        "time_stamp_date, date_string FROM live_county_data WHERE date_string = ?";
 
-                return jdbcTemplate.query(sql,
-                        (resultSet, i) -> {
-                            String countyName = resultSet.getString("county_name");
-                            Integer countyFid = resultSet.getInt("fid");
-                            Integer confirmedCovidCases = resultSet.getInt("confirmed_covid_cases");
-                            Float populationProportionCovidCases = resultSet
-                                    .getFloat("population_proportion_covid_cases");
-                            Integer timeStampDate = resultSet.getInt("time_stamp_date");
-                            String dateString = resultSet.getString("date_string");
-                            return new LiveCountyData(countyName, countyFid, confirmedCovidCases,
-                                    populationProportionCovidCases, timeStampDate, dateString);
-                },      stringDate);
+        return jdbcTemplate.query(sql,
+                (resultSet, i) -> {
+                    String countyName = resultSet.getString("county_name");
+                    Integer countyFid = resultSet.getInt("fid");
+                    Integer confirmedCovidCases = resultSet.getInt("confirmed_covid_cases");
+                    Float populationProportionCovidCases = resultSet
+                            .getFloat("population_proportion_covid_cases");
+                    Integer timeStampDate = resultSet.getInt("time_stamp_date");
+                    String dateString = resultSet.getString("date_string");
+                    return new LiveCountyData(countyName, countyFid, confirmedCovidCases,
+                            populationProportionCovidCases, timeStampDate, dateString);
+        },      stringDate);
+    }
+
+    @Override
+    public List<LiveCountyData> liveSelectRecentDataByCountyName(String name) {
+        final String sql = "SELECT county_name, fid, confirmed_covid_cases, population_proportion_covid_cases, " +
+                "time_stamp_date, date_string FROM live_county_data WHERE county_name = ? " +
+                "ORDER BY time_stamp_date DESC LIMIT 7";
+
+        return jdbcTemplate.query(sql,
+                (resultSet, i) -> {
+                    String countyName = resultSet.getString("county_name");
+                    Integer countyFid = resultSet.getInt("fid");
+                    Integer confirmedCovidCases = resultSet.getInt("confirmed_covid_cases");
+                    Float populationProportionCovidCases = resultSet
+                            .getFloat("population_proportion_covid_cases");
+                    Integer timeStampDate = resultSet.getInt("time_stamp_date");
+                    String dateString = resultSet.getString("date_string");
+                    return new LiveCountyData(countyName, countyFid, confirmedCovidCases,
+                            populationProportionCovidCases, timeStampDate, dateString);
+                },      name);
+
     }
 
 

@@ -27,4 +27,8 @@ public class LiveCountyService {
         return liveCountyDao.liveSelectCountiesByDate(stringDate);
     }
 
+    public List<LiveCountyData> liveGetRecentDataByCountyName(String name) {
+        return liveCountyDao.liveSelectRecentDataByCountyName(name);
+    }
+
 }
