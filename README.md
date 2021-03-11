@@ -5,7 +5,7 @@ This application allows users to view information related to the spread of Covid
 
 This project is divided into a backend and frontend. The backend has been developed using the Java Spring Boot web framework to host a simple API. The frontend has been developed using React and queries data from the API. A PostgreSQL database serving the API is implemented.
 
-In order to run this project locally it is necessary to have Node.js, the yarn package manager, Java 11 and Macen installed on your machine. The AWS Command Line Interface tool will be used to set up a database.
+In order to run this project locally it is necessary to have Node.js, the yarn package manager, Java 11 and Maven installed on your machine. The AWS Command Line Interface tool will be used to set up a database.
 
 Using the AWS CLI tool to create the database for the Spring Boot API to retrieve data from, run the following command:
 ```json
