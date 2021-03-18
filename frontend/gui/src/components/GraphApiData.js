@@ -10,10 +10,25 @@ import {
   Cell,
   Pie,
   PieChart,
+  LineChart,
+  Label,
+  LabelList,
+  Line,
+  Brush,
 } from "recharts";
 import { scaleOrdinal } from "d3-scale";
 import { schemeCategory10 } from "d3-scale-chromatic";
 const axios = require("axios");
+
+const data02 = [
+  { name: "Page A", uv: 300, pv: 2600, amt: 3400 },
+  { name: "Page B", uv: 400, pv: 4367, amt: 6400 },
+  { name: "Page C", uv: 300, pv: 1398, amt: 2400 },
+  { name: "Page D", uv: 200, pv: 9800, amt: 2400 },
+  { name: "Page E", uv: 278, pv: 3908, amt: 2400 },
+  { name: "Page F", uv: 189, pv: 4800, amt: 2400 },
+  { name: "Page G", uv: 189, pv: 4800, amt: 2400 },
+];
 
 const colors = scaleOrdinal(schemeCategory10).range();
 
@@ -28,6 +43,18 @@ const GraphApiData = (props) => {
 
   const handleBarAnimationEnd = () => {
     console.log("Animation end");
+  };
+
+  const handleLegendMouseEnter = () => {
+    // setState({
+    //   opacity: 0.5,
+    // });
+  };
+
+  const handleLegendMouseLeave = () => {
+    // setState({
+    //   opacity: 1,
+    // });
   };
   // A placeholder variable used while waiting for api response.
   const barDataPlaceholder = {
@@ -96,28 +123,40 @@ const GraphApiData = (props) => {
   } else {
     if (props.barChartFlag === true) {
       return (
-        <BarChart
-          width={800}
-          height={400}
-          data={liveCountyData}
-          onClick={handlePvBarClick}
-        >
+        // <BarChart
+        //   width={800}
+        //   height={400}
+        //   data={liveCountyData}
+        //   onClick={handlePvBarClick}
+        // >
+        //   <XAxis dataKey="dateString" />
+        //   <YAxis yAxisId="a" />
+        //   <Legend />
+        //   <Tooltip />
+        //   <CartesianGrid vertical={false} />
+        //   <Bar
+        //     yAxisId="a"
+        //     dataKey="confirmedCovidCases"
+        //     onAnimationStart={handleBarAnimationStart}
+        //     onAnimationEnd={handleBarAnimationEnd}
+        //   >
+        //     {liveCountyData.map((entry, index) => (
+        //       <Cell key={`cell-${index}`} fill={colors[index % 20]} />
+        //     ))}
+        //   </Bar>
+        // </BarChart>
+        <LineChart width={500} height={300} data={liveCountyData}>
           <XAxis dataKey="dateString" />
-          <YAxis yAxisId="a" />
-          <Legend />
+          <YAxis />
           <Tooltip />
-          <CartesianGrid vertical={false} />
-          <Bar
-            yAxisId="a"
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+          <Line
+            type="monotone"
             dataKey="confirmedCovidCases"
-            onAnimationStart={handleBarAnimationStart}
-            onAnimationEnd={handleBarAnimationEnd}
-          >
-            {liveCountyData.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={colors[index % 20]} />
-            ))}
-          </Bar>
-        </BarChart>
+            stroke="#8884d8"
+          />
+          {/* <Line type="monotone" dataKey="pv" stroke="#82ca9d" /> */}
+        </LineChart>
       );
     }
     if (props.pieChartFlag === true) {
