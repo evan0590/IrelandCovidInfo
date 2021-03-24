@@ -30,7 +30,7 @@ public class WebMockTest {
     private LiveCountyService service;
 
     @Test
-    public void liveGetCountyByName_ReturnedJsonOject_ContainsCountyName() throws Exception {
+    public void liveGetCountyByName_ReturnedJsonObject_ContainsCountyName() throws Exception {
 
         LiveCountyData mockLiveCountyData = new LiveCountyData("Limerick", 2112, 10805,
                 (float) 5543.9, 1616112000 , "19-03-2021");
