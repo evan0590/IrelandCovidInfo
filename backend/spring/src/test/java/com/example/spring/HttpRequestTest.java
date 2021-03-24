@@ -20,7 +20,7 @@ public class HttpRequestTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void dateQueryShouldReturnWithDate() throws Exception {
+    public void main_GetDateEndpointAtPort_ContainsDate() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/api/v1/live-county/date/06-03-2021",
                 String.class)).contains("06-03-2021");
     }

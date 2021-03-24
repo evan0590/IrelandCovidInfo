@@ -21,7 +21,7 @@ class ApplicationTest {
 	private MockMvc mockMvc;
 
 	@Test
-	public void shouldReturnRecentWithCountyName() throws Exception {
+	public void main_GetRecentEndpoint_ContainsCountyName() throws Exception {
 		this.mockMvc.perform(get("/api/v1/live-county/recent/Limerick")).andDo(print()).andExpect(status().isOk())
 				.andExpect(content().string(containsString("Limerick")));
 	}
